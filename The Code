@@ -1,0 +1,52 @@
+float x;
+float y;
+float Color = random(255);
+//in order to make a class we must declare it exists outside of both draw and setup
+void setup(){
+  size(480,280);
+  background(255,0,0);
+  stroke(Color);
+  fill(Color);
+  //this starts us off in the midpoint of the screen
+  x = width/2;
+  y= height/2;
+  frameRate(1000000);
+}
+
+void WalkerGreyscale() {
+  //this generates a random number between -1 and 1, and then adds it to x
+  x = x + random(-1,1);
+  //the same but for y
+  y = y + random(-1,1);
+  Color = Color + random(-1,1);
+  if (Color > 255) {
+    Color = 0;
+  }
+  if (Color < 0) {
+    Color = 255;
+  }
+  stroke(Color);
+  fill(Color);
+  //this next section of code makes the walls of the screen act as doors to other walls
+  
+  //this will act when x goes off the canvas on either left or right walls
+  if (x > width){
+    x = 0;
+    }
+  //if goes off to the right too much
+  if (x < 0) {
+    x = width;
+    }
+  //same but for y
+  if (y > height){
+    y = 0;
+    }
+  if (y < 0) {
+    y = height;
+    }
+  rect(x,y,5,5);
+}
+
+void draw() {
+  WalkerGreyscale();
+}
